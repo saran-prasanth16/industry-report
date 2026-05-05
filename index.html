@@ -1,3 +1,4 @@
+bi.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,6 +46,29 @@
 
         h1, h2, h3, p, ul { margin: 0; padding: 0; }
 
+        /* --- Top Navigation & Logo --- */
+        .top-nav {
+            background-color: #000000; /* Changed to Black */
+            padding: 15px 20px;
+            position: relative;
+            z-index: 90;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle separator line */
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+        }
+        .brand-logo {
+            height: 45px; 
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+        .brand-logo:hover {
+            transform: scale(1.02);
+        }
+
         /* --- 1. Live Granular Data Ticker --- */
         .data-ticker {
             background-color: var(--dark-gray); color: var(--highlight-orange);
@@ -88,7 +112,7 @@
         .fade-in-section { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; will-change: opacity, transform; }
         .fade-in-section.is-visible { opacity: 1; transform: none; }
 
-        /* --- 2. Interactive ROI Calculator (Restored text blocks) --- */
+        /* --- 2. Interactive ROI Calculator --- */
         .calculator-box {
             background: var(--white); border-radius: 12px; padding: 40px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.05); max-width: 800px; margin: 40px auto;
@@ -155,7 +179,7 @@
         @media(max-width: 768px) {
             .hero h1 { font-size: 2.2em; }
             .calc-grid { grid-template-columns: 1fr; }
-            .trust-shield-badge { display: none; } /* Hide on mobile to save space */
+            .trust-shield-badge { display: none; }
         }
     </style>
 </head>
@@ -175,6 +199,14 @@
             <span class="ticker-item">🔒 SOC2 Compliant Data Infrastructure</span>
         </div>
     </div>
+
+    <!-- NEW NAVIGATION & LOGO AREA (BLACK BACKGROUND) -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <!-- LOCAL FILE LINK: Ensure logo.png is in the same folder as this HTML file -->
+            <img src="logo.png" alt="BrandIdea.ai Logo" class="brand-logo hover-target" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        </div>
+    </nav>
 
     <header class="hero">
         <canvas id="matrix-bg"></canvas>
