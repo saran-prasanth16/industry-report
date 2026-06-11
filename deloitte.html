@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decode India's $4,000 Per Capita Shift | BrandIdea.ai</title>
+    <meta name="description" content="Build Brands, Deliver Results with granular, last-mile AI insights on India's consumption shifts. Request a demo.">
+    <style>
+        /* Mobile-first CSS & Variables */
+        :root {
+            --primary-green: #004230;     
+            --secondary-green: #01513e;   
+            --highlight-orange: #ff9800;  
+            --hover-orange: #e65100;      
+            --dark-gray: #1a1a1a;
+            --light-cream: #fffcf5;       
+            --white: #ffffff;
+            --alert-red: #d32f2f;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-cream);
+            color: var(--dark-gray);
+            line-height: 1.6;
+            overflow-x: hidden;
+            cursor: none; /* Hide default cursor on desktop */
+        }
+
+        /* --- Custom Smart Cursor --- */
+        .custom-cursor {
+            position: fixed; top: 0; left: 0; width: 15px; height: 15px;
+            background-color: var(--highlight-orange); border-radius: 50%;
+            pointer-events: none; z-index: 999999; transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+            mix-blend-mode: difference;
+        }
+        .custom-cursor.hovering { width: 40px; height: 40px; background-color: var(--white); opacity: 0.8; }
+        @media (hover: none) and (pointer: coarse) {
+            body { cursor: auto; }
+            .custom-cursor { display: none; }
+        }
+
+        h1, h2, h3, p, ul { margin: 0; padding: 0; }
+
+        /* --- CENTERED TOP NAVIGATION & MASSIVE LOGO --- */
+        .top-nav {
+            background-color: #000000;
+            padding: 20px 20px; 
+            position: relative;
+            z-index: 90;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center; 
+        }
+        .brand-logo {
+            height: 80px; 
+            width: auto;
+            transition: transform 0.3s ease;
+            cursor: none;
+            filter: drop-shadow(0px 4px 10px rgba(255, 152, 0, 0.15)); 
+        }
+        .brand-logo:hover {
+            transform: scale(1.05); 
+        }
+
+        /* --- 1. Live Granular Data Ticker --- */
+        .data-ticker {
+            background-color: var(--dark-gray); color: var(--highlight-orange);
+            font-family: monospace; font-size: 0.85em; padding: 8px 0;
+            overflow: hidden; white-space: nowrap; border-bottom: 1px solid #333;
+            position: relative; z-index: 100;
+        }
+        .ticker-content { display: inline-block; animation: ticker 30s linear infinite; }
+        .ticker-item { margin-right: 40px; }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* --- Hero Section & Canvas --- */
+        .hero {
+            position: relative;
+            background: linear-gradient(135deg, rgba(1, 81, 62, 0.95), rgba(0, 66, 48, 0.95));
+            color: var(--white); text-align: center; padding: 100px 20px 80px; overflow: hidden;
+        }
+        #matrix-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.15; pointer-events: none; }
+        .hero-content { position: relative; z-index: 1; }
+        .hero h1 { font-size: 3.5em; margin: 0 auto 20px; max-width: 900px; font-weight: 800; line-height: 1.1; text-transform: uppercase; }
+        .hero p.subtitle { font-size: 1.3em; max-width: 700px; margin: 20px auto 30px; }
+
+        /* --- Buttons --- */
+        .magnetic-wrap { display: inline-block; padding: 20px; }
+        .cta-btn {
+            background-color: var(--highlight-orange); color: var(--white);
+            padding: 18px 36px; border: none; border-radius: 8px; font-size: 20px; font-weight: bold;
+            text-transform: uppercase; box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
+            transition: background-color 0.3s ease, transform 0.1s;
+        }
+        .cta-btn:hover { background-color: var(--hover-orange); }
+
+        /* --- General Section Layout --- */
+        .section { padding: 80px 20px; max-width: 1200px; margin: auto; }
+        .section-title { text-align: center; font-size: 2.2em; margin-bottom: 20px; color: var(--secondary-green); text-transform: uppercase; }
+        .fade-in-section { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; will-change: opacity, transform; }
+        .fade-in-section.is-visible { opacity: 1; transform: none; }
+
+        /* --- 3D Tilt Module Grid --- */
+        .module-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; perspective: 1000px; }
+        .module-card {
+            background: var(--white); border-radius: 12px; padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); text-align: center; border-top: 4px solid var(--highlight-orange);
+            transform-style: preserve-3d; transition: transform 0.1s ease-out;
+        }
+        .module-card h3 { font-size: 1.5em; margin-bottom: 15px; color: var(--primary-green); transform: translateZ(30px); }
+        .module-card p { transform: translateZ(20px); }
+        
+        /* Local Screenshot Image Style */
+        .module-screenshot {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            object-position: top center;
+            border-radius: 8px;
+            margin-top: 20px;
+            border: 1px solid #eaeaea;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transform: translateZ(40px); /* Deepest 3D pop */
+            background-color: #f1f3f5; /* Fallback color if image is missing */
+        }
+
+        /* --- Infinite Logo Marquee --- */
+        .marquee-section { background: var(--white); padding: 40px 0; overflow: hidden; border-top: 1px solid #eee; border-bottom: 1px solid #eee; }
+        .marquee-wrapper { display: flex; white-space: nowrap; width: 200%; animation: marquee 20s linear infinite; align-items: center; }
+        
+        /* Optional: Delete this line if you want it to keep moving even when they hover over it */
+        .marquee-wrapper:hover { animation-play-state: paused; }
+        
+        /* --- Actual Image Tags for Client Logos (UPDATED to Full Color) --- */
+        .client-logo { 
+            height: 50px; 
+            width: auto; 
+            max-width: 160px; 
+            margin: 0 40px; 
+            object-fit: contain; 
+            opacity: 1; /* Set to full visibility */
+            /* Grayscale filter removed so it shows in color by default */
+        }
+
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* --- Single-Step Form --- */
+        .form-container {
+            background: var(--white); padding: 50px; border-radius: 12px;
+            max-width: 600px; margin: auto; box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .form-input { width: 100%; padding: 15px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; font-size: 16px; outline: none; cursor: none; }
+        .form-input:focus { border-color: var(--highlight-orange); }
+        
+        .form-step { display: none; animation: slideIn 0.4s ease-out; }
+        .form-step.active { display: block; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media(max-width: 768px) {
+            .hero h1 { font-size: 2.2em; }
+            .brand-logo { height: 50px; } 
+            .form-container { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="custom-cursor" id="cursor"></div>
+
+    <div class="data-ticker hover-target">
+        <div class="ticker-content">
+            <span class="ticker-item">📈 [MAHARASHTRA] Urban Ad Wastage Detected: 32% Average</span>
+            <span class="ticker-item">📊 [UTTAR PRADESH] 1,200 New Villages Indexed in FMCG Data Lake</span>
+            <span class="ticker-item">📉 [TAMIL NADU] Tier-3 Beverage Demand Outpacing Tier-1 by 14%</span>
+            <span class="ticker-item">🔒 SOC2 Compliant Data Infrastructure</span>
+            <span class="ticker-item">📈 [MAHARASHTRA] Urban Ad Wastage Detected: 32% Average</span>
+            <span class="ticker-item">📊 [UTTAR PRADESH] 1,200 New Villages Indexed in FMCG Data Lake</span>
+            <span class="ticker-item">📉 [TAMIL NADU] Tier-3 Beverage Demand Outpacing Tier-1 by 14%</span>
+            <span class="ticker-item">🔒 SOC2 Compliant Data Infrastructure</span>
+        </div>
+    </div>
+
+    <nav class="top-nav">
+        <div class="nav-container">
+            <img src="logo.png" alt="BrandIdea.ai Logo" class="brand-logo hover-target" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        </div>
+    </nav>
+
+    <header class="hero">
+        <canvas id="matrix-bg"></canvas>
+        <div class="hero-content">
+            <h1>Build Brands.<br><span style="color:var(--highlight-orange);">Deliver Results.</span></h1>
+            <p class="subtitle">Growth is shifting to the micro-market level. Most brands fail the last mile. Decode exactly who your next customers are and where they live with BrandIdea.ai.</p>
+            
+            <div class="magnetic-wrap js-magnet">
+                <button class="cta-btn hover-target" onclick="document.getElementById('demo').scrollIntoView({behavior: 'smooth'})">Unlock Your Demand Map</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="section fade-in-section" style="padding-bottom: 40px;">
+        <h2 class="section-title">Discover Your Hidden Growth</h2>
+        <p style="text-align:center; font-weight: bold; font-size: 1.3em; max-width: 800px; margin: 0 auto; color: var(--primary-green);">
+            Macro strategies bleed budget. See how much last-mile targeting can save you.
+        </p>
+    </section>
+
+    <section class="section fade-in-section" style="padding-top: 40px;">
+        <h2 class="section-title">Enterprise Analytics Modules</h2>
+        <div class="module-grid">
+            <div class="module-card js-tilt hover-target">
+                <h3>BI LocaView™ Maps</h3>
+                <p>Visualize category demand at the last mile. Pinpoint high-growth micro-markets.</p>
+                <img src="screenshot-map.png" alt="LocaView Map Preview" class="module-screenshot hover-target" onerror="this.style.display='none'">
+            </div>
+            <div class="module-card js-tilt hover-target">
+                <h3>AI Predictive Analytics</h3>
+                <p>Go beyond "what happened". Forecast shifts in consumption with ML insights.</p>
+                <img src="screenshot-dashboard.png" alt="AI Dashboard Preview" class="module-screenshot hover-target" onerror="this.style.display='none'">
+            </div>
+            <div class="module-card js-tilt hover-target">
+                <h3>Rural Progressive Index</h3>
+                <p>Unlock rural blue oceans. Rank 6lakhs+ villages by their readiness for your brand.</p>
+                <img src="screenshot-index.png" alt="Index Ranking Preview" class="module-screenshot hover-target" onerror="this.style.display='none'">
+            </div>
+        </div>
+    </section>
+
+    <section class="marquee-section fade-in-section">
+        <h3 style="text-align: center; color: #999; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; font-size: 0.9em;">Trusted by Enterprise Leaders</h3>
+        <div class="marquee-wrapper hover-target">
+            <img src="client1.png" alt="Client Logo 1" class="client-logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x60/f8f9fa/999999?text=client1.png';">
+            <img src="client2.png" alt="Client Logo 2" class="client-logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x60/f8f9fa/999999?text=client2.png';">
+            <img src="client3.png" alt="Client Logo 3" class="client-logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x60/f8f9fa/999999?text=client3.png';">
+            <img src="client4.png" alt="Client Logo 4" class="client-logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x60/f8f9fa/999999?text=client4.png';">
+            <img src="client5.png" alt="Client Logo 5" class="client-logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x60/f8f9fa/999999?text=client5.png';">
+            <img src="client6.png" alt="Client Logo 6" class="client-logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x60/f8f9fa/999999?text=client6.png';">
+			<img src="client7.png" alt="Client Logo 7" class="client-logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x60/f8f9fa/999999?text=client7.png';">
+            <img src="client8.png" alt="Client Logo 8" class="client-logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x60/f8f9fa/999999?text=client8.png';">
+            <img src="client9.png" alt="Client Logo 9" class="client-logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x60/f8f9fa/999999?text=client9.png';">
+            <img src="client10.png" alt="Client Logo 10" class="client-logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x60/f8f9fa/999999?text=client10.png';">
+            <img src="client1.png" alt="Client Logo 1" class="client-logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x60/f8f9fa/999999?text=client1.png';">
+            <img src="client2.png" alt="Client Logo 2" class="client-logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x60/f8f9fa/999999?text=client2.png';">
+            <img src="client3.png" alt="Client Logo 3" class="client-logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x60/f8f9fa/999999?text=client3.png';">
+            <img src="client4.png" alt="Client Logo 4" class="client-logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x60/f8f9fa/999999?text=client4.png';">
+            <img src="client5.png" alt="Client Logo 5" class="client-logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x60/f8f9fa/999999?text=client5.png';">
+            <img src="client6.png" alt="Client Logo 6" class="client-logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x60/f8f9fa/999999?text=client6.png';">
+			<img src="client7.png" alt="Client Logo 7" class="client-logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x60/f8f9fa/999999?text=client7.png';">
+            <img src="client8.png" alt="Client Logo 8" class="client-logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x60/f8f9fa/999999?text=client8.png';">
+            <img src="client9.png" alt="Client Logo 9" class="client-logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x60/f8f9fa/999999?text=client9.png';">
+            <img src="client10.png" alt="Client Logo 10" class="client-logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x60/f8f9fa/999999?text=client10.png';">
+        </div>
+    </section>
+
+    <section id="demo" class="section fade-in-section" style="background: var(--primary-green); border-radius: 12px; margin-top: 40px; margin-bottom: 80px;">
+        <div class="form-container">
+            <h2 style="color: var(--primary-green); text-transform: uppercase; margin-bottom: 30px; text-align: center;">Get Your Custom Blueprint</h2>
+            
+            <div id="form-body" class="form-step active" style="text-align: left;">
+                
+                <label style="color: var(--dark-gray); font-weight: bold; display: block; margin-bottom: 10px;">What is your Primary growth bottleneck?</label>
+                <input type="text" class="form-input hover-target" placeholder="Type your answer here...">
+                
+                <label style="color: var(--dark-gray); font-weight: bold; display: block; margin-bottom: 10px;">Company Name</label>
+                <input type="text" class="form-input hover-target" placeholder="Enter Company Name">
+                
+                <label style="color: var(--dark-gray); font-weight: bold; display: block; margin-bottom: 10px;">Work Email Address</label>
+                <input type="email" class="form-input hover-target" placeholder="name@company.com">
+                
+                <div class="magnetic-wrap js-magnet" style="display: block; padding: 0; margin-top: 10px;">
+                    <button class="cta-btn hover-target" style="width: 100%;" onclick="submitForm()">Request a Free demo</button>
+                </div>
+                
+                <p style="font-size: 0.8em; color: #999; margin-top: 20px; text-align: center;">🔒 Your data is secure and will never be shared.</p>
+            </div>
+            
+            <div id="step-success" class="form-step" style="text-align: center;">
+                <h3 style="color: var(--primary-green); font-size: 2em; margin-bottom: 10px;">Request Received.</h3>
+                <p style="color: #666;">Our data strategy team will contact you shortly with your custom insights.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        /* =========================================
+           Smart Cursor & Magnetic Buttons
+           ========================================= */
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => { cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; });
+        document.querySelectorAll('.hover-target, img').forEach(t => {
+            t.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+            t.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+        });
+
+        document.querySelectorAll('.js-magnet').forEach(magnet => {
+            const btn = magnet.querySelector('.cta-btn');
+            magnet.addEventListener('mousemove', (e) => {
+                const rect = magnet.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2, y = e.clientY - rect.top - rect.height / 2;
+                btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+            });
+            magnet.addEventListener('mouseleave', () => btn.style.transform = 'translate(0px, 0px)');
+        });
+
+        /* =========================================
+           Simplified Form Submission Logic
+           ========================================= */
+        function submitForm() {
+            document.getElementById('form-body').classList.remove('active');
+            document.getElementById('step-success').classList.add('active');
+        }
+
+        /* =========================================
+           Matrix Canvas Background & Scroll Observer
+           ========================================= */
+        const bgCanvas = document.getElementById('matrix-bg');
+        const bgCtx = bgCanvas.getContext('2d');
+        function resizeBg() { bgCanvas.width = window.innerWidth; bgCanvas.height = bgCanvas.parentElement.offsetHeight; }
+        window.addEventListener('resize', resizeBg); resizeBg();
+        const letters = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''); const drops = Array(Math.floor(bgCanvas.width/14)).fill(1);
+        setInterval(() => {
+            bgCtx.fillStyle = 'rgba(0, 66, 48, 0.05)'; bgCtx.fillRect(0, 0, bgCanvas.width, bgCanvas.height);
+            bgCtx.fillStyle = '#ffffff'; bgCtx.font = '14px monospace';
+            for(let i=0; i<drops.length; i++) {
+                bgCtx.fillText(letters[Math.floor(Math.random()*letters.length)], i*14, drops[i]*14);
+                if(drops[i]*14 > bgCanvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }, 50);
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('is-visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in-section').forEach(sec => observer.observe(sec));
+
+    </script>
+</body>
+</html>
